@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Records</title>
+</head>
+<body>
+    <h1>Records</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="record : ${records}">
+                <td th:text="${record.id}"></td>
+                <td th:text="${record.name}"></td>
+                <td th:text="${record.value}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Add buttons for exporting and printing here -->
+	<div class="d-flex flex-row justify-content-around mb-2">
+				   <button th:onclick="'window.location.href=\'' + @{/export/pdf} + '\''" class="btn btn-outline-success ">Export to PDF</button>
+				   <button th:onclick="'window.location.href=\'' + @{/export/excel} + '\''" class="btn btn-outline-secondary ">Export to Excel</button>
+				   <button th:onclick="'window.location.href=\'' + @{/export/csv} + '\''"  class="btn btn-outline-warning ">Export to CSV</button>
+				   <button onclick="window.print()" class="btn btn-outline-info">Print</button>
+				   </div>
+    
+</body>
+</html>
