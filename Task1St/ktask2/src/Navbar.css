@@ -1,0 +1,14 @@
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left; 
+    display:flex;
+    margin-right: 20px;
+  }
+  
+  
+  .navbar a {
+    text-decoration: none;
+    color: #000; 
+  }
