@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Shopping Cart</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${cartItems.isEmpty()}">
+                    <td colspan="4">Your cart is empty.</td>
+                </tr>
+                <tr th:each="item : ${cartItems}">
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.description}"></td>
+                    <td th:text="${item.price}"></td>
+                    <td>
+                        <img th:src="${item.url}" alt="Product Image" style="max-width: 100px; max-height: 100px;">
+                    </td>
+					<td>					<form th:action="@{/Cart/remove-from-cart}" method="post">
+					                    <input type="hidden" name="cartItemId" th:value="${item.cartid}" />
+					                    <button type="submit">Remove from Cart</button>
+					                </form></td>
+									
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"></td>
+                    <td>Total:</td>
+                    <td th:text="${totalAmount}"></td>
+                </tr>
+				<tr>
+				    <td colspan="4">
+				                        <!-- Form to submit order details -->
+				       <form th:action="@{/Cart/buy-now}" method="post">
+				             <input type="hidden" name="userId" value="1"> 
+				             <input type="text" name="customerName" placeholder="Enter customer name"><br/>	<br/>
+				             <input type="text" name="shippingAddress" placeholder="Enter shipping address"><br/><br/>
+							 <input type="text" name="account number" placeholder="Enter card number"><br/> <br/>
+							 <input type="text" name="account date" placeholder="Enter expired date "><br/>	<br/>
+							 <input type="id" name="cvv" placeholder="Enter cvv number"><br/><br/>
+				             <button type="submit">Buy Now</button>
+				         </form>
+				      </td>
+				 </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
